@@ -1,1 +1,140 @@
+* {
+    box-sizing: border-box;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html.dark body {
+    background-color: #08090f;
+    color: #f1f5f9;
+}
+
+html:not(.dark) body {
+    background-color: #fff5f8;
+    color: #1e293b;
+}
+
+/* Header Glassmorphism */
+html.dark .sakura-header-bar {
+    background: rgba(13, 15, 26, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 59, 117, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+html:not(.dark) .sakura-header-bar {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 59, 117, 0.15);
+    box-shadow: 0 4px 15px rgba(255, 180, 200, 0.25);
+}
+
+html.dark .text-sakura-glow {
+    background: linear-gradient(135deg, #ffffff 0%, #ffe4ed 40%, #ff5c8a 80%, #ff3b75 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 8px rgba(255, 59, 117, 0.4));
+}
+
+html:not(.dark) .text-sakura-glow {
+    background: linear-gradient(135deg, #2d0615 0%, #e61d5b 60%, #ff3b75 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+@keyframes sakuraRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.animate-sakura-spin {
+    animation: sakuraRotate 10s linear infinite;
+}
+
+/* Horizontal Showcase Scrollbar Customization */
+.showcase-scroll {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.showcase-scroll::-webkit-scrollbar {
+    display: none;
+}
+
+/* Showcase Card Hover Effect */
+.showcase-card {
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.showcase-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 59, 117, 0.6);
+    box-shadow: 0 8px 25px rgba(255, 59, 117, 0.3);
+}
+
+/* Cinematic Vignette Overlay for Sidebar */
+.vignette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle at center, transparent 30%, rgba(2, 4, 8, 0.8) 100%);
+    z-index: 2;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #08090f;
+}
+::-webkit-scrollbar-thumb {
+    background: #ff3b75;
+    border-radius: 8px;
+}
+
+#sakuraCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+
+html.dark .glass-card {
+    background: rgba(20, 23, 38, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 60, 120, 0.18);
+    width: 100%;
+}
+
+html:not(.dark) .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 92, 138, 0.2);
+    box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
+    width: 100%;
+}
+
+.hidden {
+    display: none !important;
+}
 
