@@ -1,1 +1,240 @@
+<!DOCTYPE html>
+<html lang="my" class="dark h-full">
+<head>
+    <meta charset="UTF-8">
+    <!-- Tomato Manga Zone ကဲ့သို့ Mobile Screen တွင် Zoom နှင့် View အသင့်အတင့် အနီးကပ်ပေါ်စေရန် Viewport အတိအကျသတ်မှတ်ခြင်း -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Realm - Main Web</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: {
+                            base: '#08090f',
+                            surface: '#0d0f1a',
+                            card: '#141726',
+                            border: 'rgba(255, 60, 120, 0.18)'
+                        },
+                        sakura: {
+                            50: '#fff0f5',
+                            100: '#ffe4ed',
+                            300: '#ff8dae',
+                            400: '#ff5c8a',
+                            500: '#ff3b75',
+                            600: '#e61d5b',
+                            900: '#3d081b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Cinzel', 'serif']
+                    },
+                    boxShadow: {
+                        'sakura-glow': '0 0 20px rgba(255, 59, 117, 0.35)',
+                        'sakura-sm': '0 0 8px rgba(255, 59, 117, 0.2)'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex flex-col min-h-screen relative overflow-x-hidden w-full m-0 p-0">
+
+    <!-- Falling Sakura Petals Background Canvas -->
+    <canvas id="sakuraCanvas"></canvas>
+
+    <!-- HEADER BAR -->
+    <header class="sticky top-0 z-40 w-full sakura-header-bar">
+        <div class="w-full px-3 sm:px-4 flex items-center justify-between h-16 sm:h-20">
+
+            <!-- LEFT SIDE: TITLE & ROTATING SAKURA FLOWER -->
+            <div class="flex items-center gap-2.5 cursor-pointer select-none group" onclick="goHome()">
+                <div class="relative flex items-center justify-center shrink-0">
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-sakura-500 to-sakura-300 rounded-xl blur-xs opacity-60 group-hover:opacity-100 transition duration-300"></div>
+                    <div class="relative w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-br from-slate-900 via-sakura-900 to-sakura-600 border border-sakura-400/40 flex items-center justify-center text-white shadow-sakura-glow">
+                        <svg class="w-5 h-5 sm:w-6 sm:h-6 text-sakura-100 animate-sakura-spin" viewBox="0 0 100 100" fill="currentColor">
+                            <g transform="translate(50,50)">
+                                <path d="M 0,-10 C -12,-35 0,-45 0,-45 C 0,-45 12,-35 0,-10 Z" fill="url(#sakuraGrad)" />
+                                <path d="M 0,-10 C -12,-35 0,-45 0,-45 C 0,-45 12,-35 0,-10 Z" fill="url(#sakuraGrad)" transform="rotate(72)" />
+                                <path d="M 0,-10 C -12,-35 0,-45 0,-45 C 0,-45 12,-35 0,-10 Z" fill="url(#sakuraGrad)" transform="rotate(144)" />
+                                <path d="M 0,-10 C -12,-35 0,-45 0,-45 C 0,-45 12,-35 0,-10 Z" fill="url(#sakuraGrad)" transform="rotate(216)" />
+                                <path d="M 0,-10 C -12,-35 0,-45 0,-45 C 0,-45 12,-35 0,-10 Z" fill="url(#sakuraGrad)" transform="rotate(288)" />
+                                <circle cx="0" cy="0" r="6" fill="#ffffff" />
+                                <circle cx="0" cy="0" r="3" fill="#ff3b75" />
+                            </g>
+                            <defs>
+                                <linearGradient id="sakuraGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#ffe4ed" />
+                                    <stop offset="60%" stop-color="#ff5c8a" />
+                                    <stop offset="100%" stop-color="#ff3b75" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                </div>
+
+                <div class="flex flex-col leading-none">
+                    <span class="text-base sm:text-xl font-black font-serif tracking-wide text-sakura-glow">
+                        SAKURA<span class="text-sakura-500 font-sans font-extrabold text-sm sm:text-base ml-1">REALM</span>
+                    </span>
+                    <span class="text-[8px] sm:text-[9px] font-bold tracking-[0.2em] text-sakura-400 dark:text-sakura-300/80 uppercase mt-0.5">
+                        Manga World
+                    </span>
+                </div>
+            </div>
+
+            <!-- RIGHT SIDE: SEARCH, DARK/LIGHT, MENU -->
+            <div class="flex items-center gap-1.5 sm:gap-2">
+                <button onclick="toggleSearchBar()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-sakura-900/30 dark:bg-sakura-900/40 border border-sakura-500/25 flex items-center justify-center text-sakura-400 hover:bg-sakura-500 hover:text-white transition duration-200 focus:outline-none" title="Search">
+                    <i class="fa-solid fa-magnifying-glass text-sm sm:text-base"></i>
+                </button>
+                
+                <button onclick="toggleDarkMode()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-sakura-900/30 dark:bg-sakura-900/40 border border-sakura-500/25 flex items-center justify-center text-sakura-400 hover:bg-sakura-500 hover:text-white transition duration-200 focus:outline-none" title="Theme Mode">
+                    <i id="themeIcon" class="fa-solid fa-moon text-sm sm:text-base"></i>
+                </button>
+                
+                <button id="menuToggleBtn" onclick="toggleRightSidebar()" class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-sakura-900/30 dark:bg-sakura-900/40 border border-sakura-500/25 flex items-center justify-center text-sakura-400 hover:bg-sakura-500 hover:text-white transition duration-200 focus:outline-none" title="Menu">
+                    <i class="fa-solid fa-bars text-sm sm:text-base"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <!-- SEARCH OVERLAY -->
+        <div id="searchOverlay" class="hidden border-t border-sakura-500/20 bg-dark-surface/95 dark:bg-dark-surface/95 backdrop-blur-md px-3 sm:px-4 py-2.5 w-full">
+            <div class="w-full flex items-center gap-2.5">
+                <i class="fa-solid fa-magnifying-glass text-sakura-400 text-sm"></i>
+                <input type="text" id="searchInput" placeholder="Search manga titles..." class="w-full bg-transparent text-slate-800 dark:text-white placeholder-slate-400 focus:outline-none text-xs sm:text-sm font-medium py-1">
+                <button onclick="toggleSearchBar()" class="text-xs text-sakura-400 hover:text-sakura-500 font-semibold px-2 py-1">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- OVERLAY BACKDROP FOR RIGHT SIDEBAR -->
+    <div id="sidebarBackdrop" onclick="toggleRightSidebar()" class="fixed inset-0 bg-black/60 backdrop-blur-xs z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+    <!-- RIGHT SIDEBAR DRAWER WITH CINEMATIC SAKURA ANIMATION BACKGROUND -->
+    <aside id="rightSidebar" class="fixed top-0 right-0 h-full w-72 sm:w-80 bg-dark-surface/90 dark:bg-dark-surface/90 backdrop-blur-2xl border-l border-sakura-500/30 z-50 p-6 flex flex-col justify-between shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out overflow-hidden">
+        
+        <!-- Cinematic Vignette & Canvas Background inside Sidebar -->
+        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+            <div class="vignette"></div>
+            <canvas id="sidebarSakuraCanvas" class="w-full h-full absolute top-0 left-0"></canvas>
+        </div>
+
+        <div class="space-y-6 relative z-10">
+            <div class="flex items-center justify-between border-b border-sakura-500/20 pb-4">
+                <span class="text-base font-bold font-serif text-sakura-glow flex items-center gap-2">
+                    <i class="fa-solid fa-spa text-sakura-500"></i> Menu Navigation
+                </span>
+                <button onclick="toggleRightSidebar()" class="w-8 h-8 rounded-lg bg-sakura-900/40 border border-sakura-500/30 text-sakura-300 flex items-center justify-center hover:bg-sakura-500 hover:text-white transition">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <nav class="flex flex-col gap-3 font-semibold text-sm text-slate-200">
+                <a href="#" onclick="toggleRightSidebar(); goHome();" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-dark-card/60 hover:bg-sakura-500/20 hover:text-sakura-400 transition border border-sakura-500/15">
+                    <i class="fa-solid fa-house w-5 text-sakura-500"></i> Home Lobby
+                </a>
+                <a href="#" onclick="toggleRightSidebar(); navigateToView('genres', 'all', 'Browse Genres');" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-dark-card/60 hover:bg-sakura-500/20 hover:text-sakura-400 transition border border-sakura-500/15">
+                    <i class="fa-solid fa-tags w-5 text-sakura-500"></i> Browse Genres
+                </a>
+                <a href="#" onclick="toggleRightSidebar(); navigateToView('latest', 'updates', 'Latest Updates');" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-dark-card/60 hover:bg-sakura-500/20 hover:text-sakura-400 transition border border-sakura-500/15">
+                    <i class="fa-solid fa-fire w-5 text-sakura-500"></i> Latest Updates
+                </a>
+            </nav>
+        </div>
+
+        <div class="text-center text-[10px] text-slate-400 border-t border-sakura-500/20 pt-4 relative z-10">
+            Sakura Realm v3.9 - Tomato Style Edition 🌸
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="relative z-10 flex-1 w-full px-3 sm:px-4 py-4 space-y-6">
+
+        <!-- HOT TRENDING SHOWCASE BAR -->
+        <section class="w-full space-y-2.5">
+            <div class="flex items-center justify-between px-1">
+                <h2 class="text-xs sm:text-sm font-bold font-serif tracking-wide text-sakura-glow flex items-center gap-1.5">
+                    <i class="fa-solid fa-fire text-sakura-500 animate-pulse"></i> 🔥 HOT TRENDING SHOWCASE
+                </h2>
+                <span class="text-[10px] text-sakura-400/80 font-medium">Swipe for more desu~</span>
+            </div>
+
+            <!-- Horizontal Scroll Container -->
+            <div id="showcaseScrollContainer" class="showcase-scroll flex gap-3.5 overflow-x-auto pb-2 pt-1 px-1 snap-x">
+                <!-- Shared Uploader Data များကို ဤနေရာတွင် အလိုအလျောက် ပြသမည် -->
+            </div>
+        </section>
+
+        <!-- VIEW 1: HOME VIEW -->
+        <section id="homeView" class="view-section space-y-4 w-full">
+            <div class="glass-card rounded-2xl p-5 sm:p-8 text-center space-y-3 w-full">
+                <h1 class="text-xl sm:text-3xl font-bold font-serif text-sakura-glow">Welcome to Sakura Realm 🌸</h1>
+                <p class="text-xs sm:text-sm text-slate-400">Cinematic manga reader desu~</p>
+            </div>
+        </section>
+
+        <!-- VIEW 2: GENRES VIEW -->
+        <section id="genresView" class="view-section hidden space-y-4 w-full">
+            <button onclick="history.back()" class="px-3.5 py-1.5 rounded-lg bg-sakura-900/40 border border-sakura-500/30 text-sakura-300 text-xs font-bold flex items-center gap-1.5 w-fit">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
+            <div class="glass-card rounded-2xl p-5 space-y-2 w-full">
+                <h2 id="genresTitle" class="text-xl font-bold font-serif text-sakura-glow">Browse Genres</h2>
+                <p class="text-xs text-slate-400">Categories listing desu~ 🌸</p>
+            </div>
+        </section>
+
+        <!-- VIEW 3: DETAIL VIEW -->
+        <section id="detailView" class="view-section hidden space-y-4 w-full">
+            <button onclick="history.back()" class="px-3.5 py-1.5 rounded-lg bg-sakura-900/40 border border-sakura-500/30 text-sakura-300 text-xs font-bold flex items-center gap-1.5 w-fit">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
+            <div class="glass-card rounded-2xl p-5 space-y-3 w-full">
+                <div id="detailCoverBox" class="w-full h-48 rounded-xl bg-cover bg-center border border-sakura-500/30 flex items-center justify-center"></div>
+                <h2 id="detailTitle" class="text-xl font-bold font-serif text-sakura-glow">Manga Title</h2>
+                <p id="detailChapter" class="text-xs text-sakura-400 font-semibold">Chapter Info</p>
+                <button onclick="navigateToView('reader', 'ch-1', 'Chapter Reading')" class="w-full py-3 rounded-xl bg-sakura-600 text-white font-bold text-xs sm:text-sm shadow-sakura-glow hover:bg-sakura-500 transition">
+                    Read Chapter
+                </button>
+            </div>
+        </section>
+
+        <!-- VIEW 4: READER VIEW -->
+        <section id="readerView" class="view-section hidden space-y-4 w-full">
+            <button onclick="history.back()" class="px-3.5 py-1.5 rounded-lg bg-sakura-900/40 border border-sakura-500/30 text-sakura-300 text-xs font-bold flex items-center gap-1.5 w-fit">
+                <i class="fa-solid fa-arrow-left"></i> Back to Detail
+            </button>
+            <div class="glass-card rounded-2xl p-5 text-center space-y-3 w-full">
+                <h2 id="readerTitle" class="text-lg font-bold font-serif text-sakura-glow">Chapter Reading</h2>
+                <div class="p-6 bg-black/40 rounded-xl border border-sakura-500/20 text-slate-400 text-xs w-full">
+                    Manga Panel Image Placeholder desu~ 🌸
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
 
