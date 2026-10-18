@@ -32,16 +32,8 @@ html.dark .sakura-header-bar {
     background: rgba(13, 15, 26, 0.92);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 59, 117, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-}
-
-html:not(.dark) .sakura-header-bar {
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 59, 117, 0.15);
-    box-shadow: 0 4px 15px rgba(255, 180, 200, 0.25);
 }
 
 html.dark .text-sakura-glow {
@@ -49,12 +41,6 @@ html.dark .text-sakura-glow {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 8px rgba(255, 59, 117, 0.4));
-}
-
-html:not(.dark) .text-sakura-glow {
-    background: linear-gradient(135deg, #2d0615 0%, #e61d5b 60%, #ff3b75 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
 }
 
 @keyframes sakuraRotate {
@@ -66,26 +52,273 @@ html:not(.dark) .text-sakura-glow {
     animation: sakuraRotate 10s linear infinite;
 }
 
-/* Horizontal Showcase Scrollbar Customization */
 .showcase-scroll {
     scrollbar-width: none;
     -ms-overflow-style: none;
 }
+
 .showcase-scroll::-webkit-scrollbar {
     display: none;
 }
 
-/* Showcase Card Hover Effect */
 .showcase-card {
     transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
+
 .showcase-card:hover {
     transform: translateY(-4px);
     border-color: rgba(255, 59, 117, 0.6);
     box-shadow: 0 8px 25px rgba(255, 59, 117, 0.3);
 }
 
-/* Cinematic Vignette Overlay for Sidebar */
+.sakura-slight-divider {
+    width: 85%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+}
+
+.top-slight-headline {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent 0%, #ffffff 20%, #ff3b75 50%, #ff8dae 80%, transparent 100%);
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+    z-index: 10;
+    border-radius: 999px;
+}
+
+.cinematic-blur-hero {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+}
+
+.cinematic-blur-hero::before {
+    content: "";
+    position: absolute;
+    inset: -20px;
+    background-image: var(--hero-bg, url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop'));
+    background-size: cover;
+    background-position: center;
+    filter: blur(24px) brightness(0.3);
+    transform: scale(1.15);
+    z-index: 0;
+}
+
+.cinematic-blur-hero::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(8,9,15,0.6) 0%, rgba(8,9,15,0.85) 70%, rgba(8,9,15,0.98) 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.cinematic-content {
+    position: relative;
+    z-index: 2;
+}
+
+.lobby-box {
+    background: rgba(13, 15, 26, 0.75);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.3s ease;
+}
+
+.lobby-box:hover {
+    border-color: rgba(255, 59, 117, 0.3);
+}
+
+.genres-flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    width: 100%;
+}
+
+.individual-genre-frame {
+    background-color: #08090f;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 5px 10px;
+    border-radius: 6px;
+    color: #f1f5f9;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.2;
+    box-sizing: border-box;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    transition: all 0.2s ease;
+}
+
+.individual-genre-frame:hover {
+    border-color: rgba(255, 59, 117, 0.5);
+    color: #ff8dae;
+    transform: translateY(-1px);
+}
+
+/* --- CHAPTER GREY BOX STYLING --- */
+.chapter-grey-box {
+    background: rgba(20, 23, 38, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.25s ease;
+}
+
+.chapter-grey-box:hover {
+    background: rgba(20, 23, 38, 0.9);
+    border-color: rgba(255, 59, 117, 0.4);
+    transform: translateX(4px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+.premium-bookmark-btn {
+    background: rgba(13, 15, 26, 0.85);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.premium-bookmark-btn:hover {
+    border-color: #ff3b75;
+    background: rgba(255, 59, 117, 0.15);
+}
+
+.premium-bookmark-btn.active {
+    background: linear-gradient(135deg, #ff3b75 0%, #e61d5b 100%);
+    color: #ffffff;
+    border-color: #ffffff;
+    box-shadow: 0 0 18px rgba(255, 59, 117, 0.5);
+}
+
+.formula-manga-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: transparent;
+    cursor: pointer;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    max-width: 155px;
+    margin: 0 auto;
+}
+
+.formula-manga-card:hover {
+    transform: translateY(-4px);
+}
+
+.clean-single-bold-frame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 2 / 3;
+    background-color: #0d0f1a;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border-radius: 10px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.clean-single-bold-frame::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 45px;
+    background: linear-gradient(to top, rgba(8, 9, 15, 0.92) 0%, rgba(13, 15, 26, 0.6) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 25;
+}
+
+.formula-manga-card:hover .clean-single-bold-frame {
+    border-color: rgba(255, 59, 117, 0.5);
+    box-shadow: 0 12px 28px rgba(255, 59, 117, 0.3);
+}
+
+.formula-type-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    overflow: hidden;
+    z-index: 30;
+    pointer-events: none;
+}
+
+.formula-type-badge span {
+    position: absolute;
+    top: 8px;
+    right: -14px;
+    width: 58px;
+    transform: rotate(45deg);
+    background: rgba(13, 15, 26, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+    font-size: 7px;
+    font-weight: 800;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 2px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+.formula-chapter-tag {
+    position: absolute;
+    bottom: 6px;
+    left: 6px;
+    z-index: 30;
+    background: rgba(8, 9, 15, 0.88);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2.5px 6px;
+    border-radius: 5px;
+    color: #ffe4ed;
+    font-size: 9px;
+    font-weight: 700;
+}
+
+.formula-manga-title {
+    margin-top: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: #f1f5f9;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-align: center;
+    width: 100%;
+}
+
+.first-read-btn {
+    background: linear-gradient(135deg, #141726 0%, #0d0f1a 100%);
+    border: 1.5px solid rgba(255, 59, 117, 0.5);
+    box-shadow: 0 0 15px rgba(255, 59, 117, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.first-read-btn:hover {
+    background: linear-gradient(135deg, #ff3b75 0%, #e61d5b 100%);
+    box-shadow: 0 0 22px rgba(255, 59, 117, 0.5);
+    transform: translateY(-2px);
+}
+
 .vignette {
     position: absolute;
     top: 0;
@@ -101,9 +334,11 @@ html:not(.dark) .text-sakura-glow {
     width: 6px;
     height: 6px;
 }
+
 ::-webkit-scrollbar-track {
     background: #08090f;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #ff3b75;
     border-radius: 8px;
@@ -122,19 +357,10 @@ html:not(.dark) .text-sakura-glow {
 html.dark .glass-card {
     background: rgba(20, 23, 38, 0.7);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 60, 120, 0.18);
-    width: 100%;
-}
-
-html:not(.dark) .glass-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 92, 138, 0.2);
-    box-shadow: 0 8px 20px rgba(255, 182, 193, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     width: 100%;
 }
 
 .hidden {
     display: none !important;
 }
-
