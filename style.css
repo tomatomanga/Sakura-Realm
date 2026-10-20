@@ -27,20 +27,148 @@ html:not(.dark) body {
     color: #1e293b;
 }
 
+/* 🌸 1. HOME ENTRY ANIMATION (Intro Delay 0.6s သို့ တိုးမြှင့်ထားသည်) */
+@keyframes homeCinematicEntry {
+    0% {
+        opacity: 0;
+        transform: translateY(12px) scale(0.99);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.home-cinematic-entry:not(.hidden) {
+    animation: homeCinematicEntry 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* 🚀 2. FORWARD LOBBY TRANSITION: ညာမှ ဘယ်သို့ Slide ဝင်လာခြင်း (0.7s) */
+@keyframes slideRightToLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.lobby-slide-right-transition:not(.hidden) {
+    animation: slideRightToLeft 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* 🔄 3. REVERSE LOBBY TRANSITION: Reading မှ Chapter Lobby သို့ ဘယ်မှ ညာသို့ ထွက်လာခြင်း (0.7s) */
+@keyframes slideLeftToRight {
+    0% {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.lobby-slide-left-transition:not(.hidden) {
+    animation: slideLeftToRight 0.7s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
 /* Header Glassmorphism */
 html.dark .sakura-header-bar {
-    background: rgba(13, 15, 26, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    background: rgba(13, 15, 26, 0.96);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.reader-floating-top-bar {
+    position: fixed;
+    top: -80px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 60;
+    background: rgba(13, 15, 26, 0.96);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transition: top 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.reader-floating-top-bar.show {
+    top: 0;
+}
+
+.settings-modal-box {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    background: rgba(13, 15, 26, 0.98);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-top: 1.5px solid rgba(255, 59, 117, 0.3);
+    border-left: 1.5px solid rgba(255, 59, 117, 0.15);
+    border-right: 1.5px solid rgba(255, 59, 117, 0.15);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    padding: 20px;
+    z-index: 80;
+    box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.7);
+    transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.settings-modal-box.show {
+    bottom: 0;
+}
+
+.setting-btn-active {
+    background: linear-gradient(135deg, #ff3b75 0%, #e61d5b 100%);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 3px 10px rgba(255, 59, 117, 0.3);
+}
+
+.setting-btn-inactive {
+    background: #08090f;
+    color: #cbd5e1;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.setting-btn-inactive:hover {
+    border-color: rgba(255, 59, 117, 0.4);
+    color: #ffffff;
+}
+
+/* 🌟 PREMIUM FILTER BUTTON STYLING */
+.premium-filter-btn {
+    background: linear-gradient(135deg, rgba(20, 23, 38, 0.9) 0%, rgba(61, 8, 27, 0.6) 100%);
+    border: 1px solid rgba(255, 59, 117, 0.35);
+    color: #ffe4ed;
+    box-shadow: 0 3px 10px rgba(255, 59, 117, 0.15);
+    transition: all 0.25s ease;
+}
+
+.premium-filter-btn:hover {
+    background: linear-gradient(135deg, #ff3b75 0%, #e61d5b 100%);
+    color: #ffffff;
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(255, 59, 117, 0.4);
+    transform: translateY(-1px);
 }
 
 html.dark .text-sakura-glow {
     background: linear-gradient(135deg, #ffffff 0%, #ffe4ed 40%, #ff5c8a 80%, #ff3b75 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 8px rgba(255, 59, 117, 0.4));
+    filter: drop-shadow(0 0 6px rgba(255, 59, 117, 0.3));
 }
 
 @keyframes sakuraRotate {
@@ -62,19 +190,19 @@ html.dark .text-sakura-glow {
 }
 
 .showcase-card {
-    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
 .showcase-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(255, 59, 117, 0.6);
-    box-shadow: 0 8px 25px rgba(255, 59, 117, 0.3);
+    transform: translateY(-3px);
+    border-color: rgba(255, 59, 117, 0.5);
+    box-shadow: 0 6px 20px rgba(255, 59, 117, 0.25);
 }
 
 .sakura-slight-divider {
     width: 85%;
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.2) 50%, transparent 100%);
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.15) 50%, transparent 100%);
 }
 
 .top-slight-headline {
@@ -82,10 +210,10 @@ html.dark .text-sakura-glow {
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
+    width: 45px;
     height: 2px;
-    background: linear-gradient(90deg, transparent 0%, #ffffff 20%, #ff3b75 50%, #ff8dae 80%, transparent 100%);
-    box-shadow: 0 0 12px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.6) 50%, transparent 100%);
+    box-shadow: 0 0 6px rgba(255, 255, 255, 0.3);
     z-index: 10;
     border-radius: 999px;
 }
@@ -94,20 +222,20 @@ html.dark .text-sakura-glow {
     position: relative;
     width: 100%;
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
 }
 
 .cinematic-blur-hero::before {
     content: "";
     position: absolute;
-    inset: -20px;
+    inset: -15px;
     background-image: var(--hero-bg, url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1000&auto=format&fit=crop'));
     background-size: cover;
     background-position: center;
-    filter: blur(24px) brightness(0.3);
-    transform: scale(1.15);
+    filter: blur(10px) brightness(0.35);
+    transform: scale(1.1);
     z-index: 0;
 }
 
@@ -115,7 +243,7 @@ html.dark .text-sakura-glow {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, rgba(8,9,15,0.6) 0%, rgba(8,9,15,0.85) 70%, rgba(8,9,15,0.98) 100%);
+    background: linear-gradient(to bottom, rgba(8,9,15,0.5) 0%, rgba(8,9,15,0.8) 70%, rgba(8,9,15,0.95) 100%);
     z-index: 1;
     pointer-events: none;
 }
@@ -126,10 +254,9 @@ html.dark .text-sakura-glow {
 }
 
 .lobby-box {
-    background: rgba(13, 15, 26, 0.75);
-    backdrop-filter: blur(12px);
+    background: rgba(13, 15, 26, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 .lobby-box:hover {
@@ -145,7 +272,7 @@ html.dark .text-sakura-glow {
 
 .individual-genre-frame {
     background-color: #08090f;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     padding: 5px 10px;
     border-radius: 6px;
     color: #f1f5f9;
@@ -158,7 +285,7 @@ html.dark .text-sakura-glow {
     text-align: center;
     line-height: 1.2;
     box-sizing: border-box;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     transition: all 0.2s ease;
 }
 
@@ -168,26 +295,23 @@ html.dark .text-sakura-glow {
     transform: translateY(-1px);
 }
 
-/* --- CHAPTER GREY BOX STYLING --- */
 .chapter-grey-box {
-    background: rgba(20, 23, 38, 0.6);
-    backdrop-filter: blur(10px);
+    background: rgba(20, 23, 38, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: all 0.25s ease;
+    transition: all 0.2s ease;
 }
 
 .chapter-grey-box:hover {
-    background: rgba(20, 23, 38, 0.9);
+    background: rgba(20, 23, 38, 0.95);
     border-color: rgba(255, 59, 117, 0.4);
-    transform: translateX(4px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    transform: translateX(3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
 .premium-bookmark-btn {
-    background: rgba(13, 15, 26, 0.85);
-    backdrop-filter: blur(12px);
+    background: rgba(13, 15, 26, 0.9);
     border: 1px solid rgba(255, 255, 255, 0.12);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
 }
 
 .premium-bookmark-btn:hover {
@@ -199,7 +323,7 @@ html.dark .text-sakura-glow {
     background: linear-gradient(135deg, #ff3b75 0%, #e61d5b 100%);
     color: #ffffff;
     border-color: #ffffff;
-    box-shadow: 0 0 18px rgba(255, 59, 117, 0.5);
+    box-shadow: 0 0 15px rgba(255, 59, 117, 0.4);
 }
 
 .formula-manga-card {
@@ -208,14 +332,14 @@ html.dark .text-sakura-glow {
     align-items: center;
     background: transparent;
     cursor: pointer;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
     width: 100%;
     max-width: 155px;
     margin: 0 auto;
 }
 
 .formula-manga-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
 }
 
 .clean-single-bold-frame {
@@ -223,11 +347,11 @@ html.dark .text-sakura-glow {
     width: 100%;
     aspect-ratio: 2 / 3;
     background-color: #0d0f1a;
-    border: 1.5px solid rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.12);
     border-radius: 10px;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.25s ease;
 }
 
 .clean-single-bold-frame::before {
@@ -237,14 +361,14 @@ html.dark .text-sakura-glow {
     left: 0;
     right: 0;
     height: 45px;
-    background: linear-gradient(to top, rgba(8, 9, 15, 0.92) 0%, rgba(13, 15, 26, 0.6) 50%, transparent 100%);
+    background: linear-gradient(to top, rgba(8, 9, 15, 0.9) 0%, rgba(13, 15, 26, 0.5) 50%, transparent 100%);
     pointer-events: none;
     z-index: 25;
 }
 
 .formula-manga-card:hover .clean-single-bold-frame {
     border-color: rgba(255, 59, 117, 0.5);
-    box-shadow: 0 12px 28px rgba(255, 59, 117, 0.3);
+    box-shadow: 0 10px 24px rgba(255, 59, 117, 0.25);
 }
 
 .formula-type-badge {
@@ -273,7 +397,31 @@ html.dark .text-sakura-glow {
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 2px 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.formula-new-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    z-index: 35;
+    background: linear-gradient(135deg, #ff3b75 0%, #e61d5b 100%);
+    color: #ffffff;
+    font-size: 8px;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: 0.05em;
+    box-shadow: 0 0 8px rgba(255, 59, 117, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    text-transform: uppercase;
+    animation: pulseNew 2s infinite;
+}
+
+@keyframes pulseNew {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.06); opacity: 0.85; }
+    100% { transform: scale(1); opacity: 1; }
 }
 
 .formula-chapter-tag {
@@ -281,14 +429,27 @@ html.dark .text-sakura-glow {
     bottom: 6px;
     left: 6px;
     z-index: 30;
-    background: rgba(8, 9, 15, 0.88);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(8, 9, 15, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     padding: 2.5px 6px;
     border-radius: 5px;
-    color: #ffe4ed;
     font-size: 9px;
     font-weight: 700;
+}
+
+.status-ongoing {
+    color: #ff8dae;
+    border-color: rgba(255, 92, 138, 0.3);
+}
+
+.status-complete {
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.3);
+}
+
+.status-pause {
+    color: #facc15;
+    border-color: rgba(250, 204, 21, 0.3);
 }
 
 .formula-manga-title {
@@ -308,15 +469,15 @@ html.dark .text-sakura-glow {
 
 .first-read-btn {
     background: linear-gradient(135deg, #141726 0%, #0d0f1a 100%);
-    border: 1.5px solid rgba(255, 59, 117, 0.5);
-    box-shadow: 0 0 15px rgba(255, 59, 117, 0.2);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1.5px solid rgba(255, 59, 117, 0.45);
+    box-shadow: 0 0 12px rgba(255, 59, 117, 0.15);
+    transition: all 0.25s ease;
 }
 
 .first-read-btn:hover {
     background: linear-gradient(135deg, #ff3b75 0%, #e61d5b 100%);
-    box-shadow: 0 0 22px rgba(255, 59, 117, 0.5);
-    transform: translateY(-2px);
+    box-shadow: 0 0 18px rgba(255, 59, 117, 0.4);
+    transform: translateY(-1.5px);
 }
 
 .vignette {
@@ -326,22 +487,127 @@ html.dark .text-sakura-glow {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    background: radial-gradient(circle at center, transparent 30%, rgba(2, 4, 8, 0.8) 100%);
+    background: radial-gradient(circle at center, transparent 35%, rgba(2, 4, 8, 0.75) 100%);
     z-index: 2;
 }
 
+#readerPagesContainer {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden !important;
+    background-color: #000;
+}
+
+.manga-page-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 768px;
+    min-height: 400px;
+    margin: 0 auto;
+    background-color: #0d0f1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.manga-page-wrapper.page-mode {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    user-select: none;
+    -webkit-user-select: none;
+    visibility: hidden;
+}
+
+.manga-page-wrapper.page-mode.dragging {
+    transition: none !important;
+}
+
+.manga-page-wrapper.page-mode.active-page {
+    visibility: visible;
+    transform: translate3d(0, 0, 0);
+    z-index: 10;
+}
+
+.manga-page-wrapper.page-mode.next-page {
+    visibility: visible;
+    transform: translate3d(100%, 0, 0);
+    z-index: 20;
+}
+
+.manga-page-wrapper.page-mode.prev-page {
+    visibility: visible;
+    transform: translate3d(-100%, 0, 0);
+    z-index: 20;
+}
+
+.simple-loading-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0d0f1a;
+    color: #ff8dae;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 2;
+    transition: opacity 0.25s ease;
+}
+
+.manga-page-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.25s ease-in-out;
+    z-index: 3;
+    position: relative;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.manga-page-wrapper.page-mode .manga-page-img {
+    max-height: 100vh;
+    max-width: 100vw;
+    object-fit: contain;
+    margin: auto;
+}
+
+.manga-page-img.loaded {
+    opacity: 1;
+}
+
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
 }
 
 ::-webkit-scrollbar-track {
-    background: #08090f;
+    background: rgba(0, 0, 0, 0.3);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #ff3b75;
-    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    min-height: 25px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.75);
 }
 
 #sakuraCanvas {
@@ -355,8 +621,7 @@ html.dark .text-sakura-glow {
 }
 
 html.dark .glass-card {
-    background: rgba(20, 23, 38, 0.7);
-    backdrop-filter: blur(12px);
+    background: rgba(20, 23, 38, 0.8);
     border: 1px solid rgba(255, 255, 255, 0.08);
     width: 100%;
 }
